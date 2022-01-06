@@ -1,5 +1,6 @@
 import { Component } from 'react/cjs/react.production.min';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ImSearch } from 'react-icons/im';
 import s from './Searchbar.module.css';
 
@@ -14,7 +15,7 @@ export default class Searchbar extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
     if (this.state.inputValue.trim() === '') {
-      toast.error('Поле пошуку пусте');
+      toast.error('enter a query');
       return;
     }
     this.props.onSubmit(this.state.inputValue);
