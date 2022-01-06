@@ -1,8 +1,8 @@
 import s from './Button.module.css';
 
-function Button() {
+function Button({ clickBtn }) {
   return (
-    <button type="button" className={s.button}>
+    <button type="button" className={s.button} onClick={clickBtn}>
       Load more
     </button>
   );
