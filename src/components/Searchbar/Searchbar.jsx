@@ -3,8 +3,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ImSearch } from 'react-icons/im';
 import s from './Searchbar.module.css';
+import PropTypes from 'prop-types';
 
 export default class Searchbar extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func,
+  };
   state = {
     inputValue: '',
   };

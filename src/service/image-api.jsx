@@ -1,4 +1,5 @@
-import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
+
 const KEY = '24124599-81915d8fff3f3b2b5bfb5c22e';
 
 export default function fetchImages(query, page) {
@@ -8,6 +9,11 @@ export default function fetchImages(query, page) {
     if (response.ok) {
       return response.json();
     }
-    return toast.error('No images found on request');
+    return Promise.reject(new Error('No images found on request'));
   });
 }
+
+fetchImages.prototype = {
+  query: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+};
