@@ -92,7 +92,7 @@ class ImageGallery extends Component {
         {images.length > 0 && <Button clickBtn={this.handleChangePage} />}
         {showModal && (
           <Modal onClose={this.togleModal}>
-            <img src={imageURL.src} alt={imageURL.alt} />
+            <img src={imageURL.src} alt={imageURL.alt} width={960} />
           </Modal>
         )}
       </>

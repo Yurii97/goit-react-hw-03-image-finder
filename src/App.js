@@ -16,9 +16,9 @@ class App extends Component {
     return (
       <>
         <Searchbar onSubmit={this.handlequeryChange} />
-        {searchQuery.trim() !== '' && (
-          <ImageGallery searchQuery={this.state.searchQuery} />
-        )}
+
+        <ImageGallery searchQuery={this.state.searchQuery} />
+
         <ToastContainer />
       </>
     );
