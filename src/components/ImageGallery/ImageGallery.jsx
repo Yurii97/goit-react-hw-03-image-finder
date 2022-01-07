@@ -15,27 +15,30 @@ class ImageGallery extends Component {
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchQuery !== this.props.searchQuery) {
-      this.setState({ images: [], page: 1, loading: true });
       console.log('change');
-      this.requestFetch();
+
+      this.requestFetch([], 1);
     }
     const prevPage = prevState.page;
     const nextPage = this.state.page;
     if (prevPage !== nextPage) {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth',
-      });
+      const { images, page } = this.state;
+      this.requestFetch(images, page);
+      // window.scrollTo({
+      //   top: document.body.scrollHeight,
+      //   behavior: 'smooth',
+      // });
     }
   }
-
-  requestFetch() {
-    const { images, page } = this.state;
+  handleChangePage = () => {
+    this.setState({ page: this.state.page + 1 });
+  };
+  requestFetch(images, page) {
+    console.log(page);
     fetchImages(this.props.searchQuery, page)
       .then(data =>
         this.setState({
           images: [...images, ...data.hits],
-          page: page + 1,
         })
       )
       .catch(error => this.setState({ error }))
@@ -61,7 +64,7 @@ class ImageGallery extends Component {
           ))}
         </ul>
         {this.state.loading && <Spiner />}
-        {images.length > 0 && <Button clickBtn={this.requestFetch} />}
+        {images.length > 0 && <Button clickBtn={this.handleChangePage} />}
       </>
     );
   }
