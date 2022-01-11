@@ -8,7 +8,7 @@ function ImageGalleryItem({ webformatURL, largeImageURL, tags, clickImg }) {
       alt={tags}
       className={s.galleryImage}
       data-source={largeImageURL}
-      onClick={clickImg}
+      onClick={() => clickImg({ src: largeImageURL, alt: tags })}
     />
   );
 }

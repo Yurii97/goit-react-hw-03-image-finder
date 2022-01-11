@@ -13,6 +13,7 @@ class ImageGallery extends Component {
     searchQuery: PropTypes.string,
   };
   state = {
+    query: '',
     images: [],
     page: 1,
     loading: false,
@@ -22,15 +23,17 @@ class ImageGallery extends Component {
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchQuery !== this.props.searchQuery) {
-      this.requestFetch([], 1);
+      this.setState({ page: 1, images: [], query: this.props.searchQuery });
     }
+
+    const { images, page, query } = this.state;
+    const prevQuery = prevState.query;
     const prevPage = prevState.page;
-    const nextPage = this.state.page;
-    if (prevPage !== nextPage) {
-      const { images, page } = this.state;
+    if (prevQuery !== query || prevPage !== page) {
       this.requestFetch(images, page);
     }
   }
+
   togleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
@@ -39,13 +42,15 @@ class ImageGallery extends Component {
   handleChangePage = () => {
     this.setState({ page: this.state.page + 1 });
   };
-  clicktoImg = ev => {
+  clicktoImg = ({ src, alt }) => {
     this.setState({
-      imageURL: { alt: ev.target.alt, src: ev.target.dataset.source },
+      imageURL: { alt, src },
     });
     this.togleModal();
   };
   requestFetch(images, page) {
+    // const { images, page } = this.state;
+
     this.setState({ loading: true });
     fetchImages(this.props.searchQuery, page)
       .then(data => {

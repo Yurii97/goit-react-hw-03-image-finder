@@ -17,7 +17,7 @@ class App extends Component {
       <>
         <Searchbar onSubmit={this.handlequeryChange} />
 
-        <ImageGallery searchQuery={this.state.searchQuery} />
+        <ImageGallery searchQuery={searchQuery} />
 
         <ToastContainer />
       </>
